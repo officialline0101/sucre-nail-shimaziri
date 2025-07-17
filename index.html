@@ -1517,7 +1517,7 @@
                 : 'メニュー未選択';
 
             // irradiationsCountの整形（nullチェック）
-            const irradiationsText = formData.irradiationsCount || 'なし';
+            const irradiationsText = formData.irradiationsCount || '';
 
             liff.sendMessages([{
                 type: 'text',
