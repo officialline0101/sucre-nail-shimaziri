@@ -1626,8 +1626,8 @@
 
 // 現在の日時を取得
 const now = new Date();
-const oneMonthLater = new Date(now);
-oneMonthLater.setMonth(now.getMonth() + 1);
+const twoMonthsLater = new Date(now);
+twoMonthsLater.setMonth(now.getMonth() + 2);
 
             // テーブルの内容を更新
             for (let i = 0; i < 7; i++) {
@@ -1670,8 +1670,8 @@ oneMonthLater.setMonth(now.getMonth() + 1);
                         continue;
                     }
 
-        // 1か月以降は✕にする
-        if (slotStart > oneMonthLater) {
+        // 2か月以降は✕にする
+        if (slotStart > twoMonthsLater) {
             cell.textContent = '✕';
             cell.classList.add('unavailable');
             continue;
