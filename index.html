@@ -487,6 +487,32 @@
             }
         }
 
+.info-textmenu {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #000000;
+    line-height: 1.5;
+    text-align: center;
+    word-wrap: break-word;
+    background-color: #eef9f5;
+    padding: 10px;
+    border-radius: 4px;
+
+    position: relative;
+    top: -8px; /* ← 全体を8pxだけ上にずらす */
+}
+
+/* 携帯端末向けのレスポンシブデザイン */
+@media (max-width: 768px) {
+    .info-textmenu {
+        font-size: 11.5px;
+        margin-top: 1px;
+        line-height: 2.0;
+        top: -5px; /* ← スマホは4pxだけ上にずらす */
+    }
+}
+
         .symptoms,
         .options {
             display: block;
@@ -907,7 +933,7 @@
     </div>
 
     <div class="container">
-        <h1>sucre nail.<br>島尻予約フォーム
+        <h1>sucre nail.<br>佐藤予約フォーム
         </h1>
         <div class="label">お客様名<span class="required">必須</span></div>
         <input type="text" id="name" placeholder="お名前を入力してください" oninput="saveInput('name')">
@@ -926,6 +952,7 @@
         <div class="menu-sections">
             <button type="button" onclick="showMenu('male')">ハンドネイル</button>
             <button type="button" onclick="showMenu('female')">フォットネイル</button>
+            <button type="button" onclick="showMenu('whitening')">スカルプチュア(10本長さ出し)</button>
         </div>
 
         <!-- メニュー表示エリア（選択されたメニュー名がここに出る） -->
@@ -939,11 +966,17 @@
             </div>
             <div class="symptoms">
                 <button type="button" onclick="selectSymptom(this, 'treatment1')" data-category="ハンドネイル" data-price="15000">ケアのみ</button>
+                <div class="info-textmenu">ケアのみ：35分</div>
                 <button type="button" onclick="selectSymptom(this, 'treatment2')" data-category="ハンドネイル" data-price="15000">クリアジェル</button>
+                <div class="info-textmenu">クリアジェル：40分</div>
                 <button type="button" onclick="selectSymptom(this, 'treatment3')" data-category="ハンドネイル" data-price="15000">ワンカラー</button>
+                <div class="info-textmenu">ワンカラー：60分</div>
                 <button type="button" onclick="selectSymptom(this, 'treatment4')" data-category="ハンドネイル" data-price="15000">シンプルアート</button>
+                <div class="info-textmenu">シンプルアート：70分</div>
                 <button type="button" onclick="selectSymptom(this, 'treatment5')" data-category="ハンドネイル" data-price="15000">ボリュームアート</button>
+                <div class="info-textmenu">ボリュームアート：120分</div>
                 <button type="button" onclick="selectSymptom(this, 'treatment5')" data-category="ハンドネイル" data-price="15000">オフのみ</button>
+                <div class="info-textmenu">オフのみ：35分</div>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">オプション</span>
@@ -959,9 +992,12 @@
                 <span class="highlight-text">◆フォットネイル◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment6')" data-category="フォットネイル" data-price="15000">ベーシックコース</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment7')" data-category="フォットネイル" data-price="15000">ケアコース</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-category="フォットネイル" data-price="15000">オフのみ</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment6')" data-category="フットネイル" data-price="15000">ベーシックコース</button>
+                <div class="info-textmenu">ベーシックコース：90分</div>
+                <button type="button" onclick="selectSymptom(this, 'treatment7')" data-category="フットネイル" data-price="15000">ケアコース</button>
+                <div class="info-textmenu">ケアコース：110分</div>
+                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-category="フットネイル" data-price="15000">オフのみ</button>
+                <div class="info-textmenu">オフのみ：35分</div>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">オプション</span>
@@ -970,6 +1006,25 @@
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">オフあり(+15分)</button>
                 <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">オフなし</button>
                 <button type="button" id="sanirradiations" onclick="selectirradiations(this)" data-price="15000">アートあり(+10分)</button>
+            </div>
+        </div>
+
+        <div id="whitening" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆スカルプチュア(10本長さ出し)◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this, 'treatment8')" data-category="スカルプチュア(10本長さ出し)" data-price="15000">10本長さ出し</button>
+                <div class="info-textmenu">所要時間：120分</div>
+                <button type="button" onclick="selectSymptom(this, 'treatment9')" data-category="スカルプチュア(10本長さ出し)" data-price="15000">10本長さ出し＋ジェルコート</button>
+                <div class="info-textmenu">所要時間：180分</div>
+            </div>
+            <div class="highlight-background">
+                <span class="highlight-text">オプション</span>
+            </div>
+            <div class="irradiations">
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">オフあり(+30分)</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">オフなし</button>
             </div>
         </div>
 
@@ -1041,7 +1096,7 @@
 
         document.addEventListener('DOMContentLoaded', function () {
             liff.init({
-                liffId: '2007763180-Ma1bPlor'
+                liffId: '2007763180-rVx7QzKG'
             }).then(() => {
                 console.log('LIFF初期化成功');
             }).catch((err) => {
@@ -1524,7 +1579,7 @@
 
             liff.sendMessages([{
                 type: 'text',
-                text: `【予約フォーム】\n指名：島尻\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\nコース：${formData.selectedMenu}\nメニュー：${selectedSymptomText},${irradiationsText}\n希望日時：\n${formData.dates[0]}\nメッセージ：${formData.message}`
+                text: `【予約フォーム】\n指名：佐藤\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\nコース：${formData.selectedMenu}\nメニュー：${selectedSymptomText},${irradiationsText}\n希望日時：\n${formData.dates[0]}\nメッセージ：${formData.message}`
             }]).then(() => {
                 /* メッセージ送信成功時の処理 */
                 alert('当日キャンセルは無いようにお願いいたします。');
@@ -1556,7 +1611,7 @@
                 return;
             }
 
-            const url = 'https://script.google.com/macros/s/AKfycbziiulE4WIH1v08Z7LVPqqEg4WmW8aJmpWJiCRWwT61xXW_suSlSrWATuGTuM8dI67gyA/exec' +
+            const url = 'https://script.google.com/macros/s/AKfycbxQQMnZYbWCRLONPxns-IvLYMCh4_GZEWNOyOfuhoDRL9w2iCGoJRaOE0j2FrxF1BKY/exec' +
                 `?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
 
             try {
@@ -1626,8 +1681,8 @@
 
 // 現在の日時を取得
 const now = new Date();
-const twoMonthsLater = new Date(now);
-twoMonthsLater.setMonth(now.getMonth() + 2);
+const oneMonthLater = new Date(now);
+oneMonthLater.setMonth(now.getMonth() + 1);
 
             // テーブルの内容を更新
             for (let i = 0; i < 7; i++) {
@@ -1670,20 +1725,19 @@ twoMonthsLater.setMonth(now.getMonth() + 2);
                         continue;
                     }
 
-        // 2か月以降は✕にする
-        if (slotStart > twoMonthsLater) {
+        // 1か月以降は✕にする
+        if (slotStart > oneMonthLater) {
             cell.textContent = '✕';
             cell.classList.add('unavailable');
             continue;
         }
 
-                    // ここで終了時間を使った条件処理を行う
-                    // 例えば、リアルタイムで既に過ぎた時間帯は×にする
-                    if (slotStart < now) {
-                        cell.textContent = '✕';
-                        cell.classList.add('unavailable');
-                        continue;
-                    }
+        // すでに過ぎた時間帯は✕にする
+        if (slotStart < now) {
+            cell.textContent = '✕';
+            cell.classList.add('unavailable');
+            continue;
+        }
 
                     const isBusinessDay = businessDays.some(businessDay => {
                         const businessDayStart = new Date(businessDay.start);
@@ -1720,11 +1774,37 @@ twoMonthsLater.setMonth(now.getMonth() + 2);
                         cell.textContent = '✕';
                         cell.classList.add('unavailable');
                     }
-                    // 日曜日で、営業日ではない場合
-                    else if (slotStart.getDay() === 4 && !isBusinessDay && businessEventTimes.length === 0) {
-                        cell.textContent = '✕';
-                        cell.classList.add('unavailable');
-                    }
+// 月曜日〜金曜日の判定
+else if (
+    (
+        // 月〜金 (ただし木曜は別ルール)
+        (slotStart.getDay() >= 1 && slotStart.getDay() <= 5)
+    ) &&
+    (
+        // 木曜日 (09:00〜18:00 ✕)
+        (
+            slotStart.getDay() === 4 &&
+            (
+                (slotStart.getHours() > 9 && slotStart.getHours() < 18) || // 10:00〜17:59
+                (slotStart.getHours() === 9 && slotStart.getMinutes() >= 0) || // 9:00〜9:59
+                (slotStart.getHours() === 18 && slotStart.getMinutes() === 0)  // 18:00ちょうど
+            )
+        )
+        ||
+        // 月・火・水・金 (09:30〜17:00 ✕)
+        (
+            slotStart.getDay() !== 4 &&
+            (
+                (slotStart.getHours() > 9 && slotStart.getHours() < 17) || // 10:00〜16:59
+                (slotStart.getHours() === 9 && slotStart.getMinutes() >= 30) || // 9:30〜9:59
+                (slotStart.getHours() === 17 && slotStart.getMinutes() === 0)   // 17:00ちょうど
+            )
+        )
+    )
+) {
+    cell.textContent = '✕';
+    cell.classList.add('unavailable');
+}
                     // 営業日でかつ他のイベントがない場合
                     else if (isBusinessDay && count === 0) {
                         cell.textContent = '◯';
