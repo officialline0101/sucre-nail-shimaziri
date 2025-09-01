@@ -1664,6 +1664,11 @@ const now = new Date();
 const twoMonthsLater = new Date(now);
 twoMonthsLater.setMonth(now.getMonth() + 2);
 
+// 翌々日までを無効にする基準日を作成（時刻をリセットして日付だけ比較する用）
+const disableUntil = new Date(now);
+disableUntil.setHours(0, 0, 0, 0); // 当日0時にリセット
+disableUntil.setDate(disableUntil.getDate() + 2); // 翌々日まで含む
+
             // テーブルの内容を更新
             for (let i = 0; i < 7; i++) {
                 const day = new Date(currentDate);
@@ -1712,13 +1717,14 @@ twoMonthsLater.setMonth(now.getMonth() + 2);
             continue;
         }
 
-                    // ここで終了時間を使った条件処理を行う
-                    // 例えば、リアルタイムで既に過ぎた時間帯は×にする
-                    if (slotStart < now) {
-                        cell.textContent = '✕';
-                        cell.classList.add('unavailable');
-                        continue;
-                    }
+        // 翌々日までの丸1日はすべて✕
+        const slotDay = new Date(slotStart);
+        slotDay.setHours(0, 0, 0, 0); // 日付だけ比較
+        if (slotDay <= disableUntil) {
+            cell.textContent = '✕';
+            cell.classList.add('unavailable');
+            continue;
+        }
 
                     const isBusinessDay = businessDays.some(businessDay => {
                         const businessDayStart = new Date(businessDay.start);
