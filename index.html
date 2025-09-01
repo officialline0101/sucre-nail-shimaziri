@@ -1664,11 +1664,6 @@ const now = new Date();
 const twoMonthsLater = new Date(now);
 twoMonthsLater.setMonth(now.getMonth() + 2);
 
-// 翌々日までを無効にする基準日を作成（時刻をリセットして日付だけ比較する用）
-const disableUntil = new Date(now);
-disableUntil.setHours(0, 0, 0, 0); // 当日0時にリセット
-disableUntil.setDate(disableUntil.getDate() + 2); // 翌々日まで含む
-
             // テーブルの内容を更新
             for (let i = 0; i < 7; i++) {
                 const day = new Date(currentDate);
@@ -1717,14 +1712,18 @@ disableUntil.setDate(disableUntil.getDate() + 2); // 翌々日まで含む
             continue;
         }
 
-        // 翌々日までの丸1日はすべて✕
-        const slotDay = new Date(slotStart);
-        slotDay.setHours(0, 0, 0, 0); // 日付だけ比較
-        if (slotDay <= disableUntil) {
+        // --- ★ 修正ポイント ★ ---
+        // 前々日の24時を過ぎていたら、その日の予約はできない
+        const deadline = new Date(day);
+        deadline.setDate(deadline.getDate() - 2); // 前々日
+        deadline.setHours(24, 0, 0, 0); // 24:00 (翌日の0:00)
+
+        if (now >= deadline) {
             cell.textContent = '✕';
             cell.classList.add('unavailable');
             continue;
         }
+        //
 
                     const isBusinessDay = businessDays.some(businessDay => {
                         const businessDayStart = new Date(businessDay.start);
