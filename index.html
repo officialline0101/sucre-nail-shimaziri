@@ -961,6 +961,13 @@
 
         <div id="male" class="menu-section">
             <div class="highlight-background">
+                <span class="highlight-text">オプション<span class="required">必須</span></span>
+            </div>
+            <div class="irradiations">
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">オフあり(+15分)</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">オフなし</button>
+            </div>
+            <div class="highlight-background">
                 <span class="highlight-text">◆ハンドネイル◆</span>
             </div>
             <div class="symptoms">
@@ -977,16 +984,17 @@
                 <button type="button" onclick="selectSymptom(this, 'treatment5')" data-category="ハンドネイル" data-price="15000">オフのみ</button>
                 <div class="info-textmenu">オフのみ：35分</div>
             </div>
+        </div>
+
+        <div id="female" class="menu-section">
             <div class="highlight-background">
-                <span class="highlight-text">オプション</span>
+                <span class="highlight-text">オプション<span class="required">必須</span></span>
             </div>
             <div class="irradiations">
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">オフあり(+15分)</button>
                 <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">オフなし</button>
+                <button type="button" id="sanirradiations" onclick="selectirradiations(this)" data-price="15000">アートあり(+10分)</button>
             </div>
-        </div>
-
-        <div id="female" class="menu-section">
             <div class="highlight-background">
                 <span class="highlight-text">◆フットネイル◆</span>
             </div>
@@ -997,14 +1005,6 @@
                 <div class="info-textmenu">ケアコース：110分</div>
                 <button type="button" onclick="selectSymptom(this, 'treatment5')" data-category="フットネイル" data-price="15000">オフのみ</button>
                 <div class="info-textmenu">オフのみ：35分</div>
-            </div>
-            <div class="highlight-background">
-                <span class="highlight-text">オプション</span>
-            </div>
-            <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">オフあり(+15分)</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">オフなし</button>
-                <button type="button" id="sanirradiations" onclick="selectirradiations(this)" data-price="15000">アートあり(+10分)</button>
             </div>
         </div>
 
@@ -1516,60 +1516,70 @@
             updateDisplayInfo();
         }
 
-        function submitForm() {
-            const formData = {
-                name: document.getElementById('name').value.trim(),
-                phone: document.getElementById('phone').value.trim(),
-                visitCount: visitCount,
-                selectedMenu: selectedMenu,
-                selectedSymptom: selectedSymptom && selectedSymptom.length > 0 ? selectedSymptom : null, // 空の選択肢をチェック
-                irradiationsCount: irradiationsCount,
-                dates: selectedFullDate ? [selectedFullDate] : null, // 空チェック
-                message: document.getElementById('message').value.trim()
-            };
+function submitForm() {
+    const formData = {
+        name: document.getElementById('name').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        visitCount: visitCount,
+        selectedMenu: selectedMenu,
+        selectedSymptom: selectedSymptom && selectedSymptom.length > 0 ? selectedSymptom : null, // 空の選択肢をチェック
+        irradiationsCount: irradiationsCount,
+        dates: selectedFullDate ? [selectedFullDate] : null, // 空チェック
+        message: document.getElementById('message').value.trim()
+    };
 
-            // フォームデータのチェック
-            if (!formData.name) {
-                alert('お名前を入力してください。');
-                return;
-            }
+    // selectedSymptomを文字列に整形
+    const selectedSymptomText = formData.selectedSymptom
+        ? formData.selectedSymptom.map(item => `${item.name}`).join(',')
+        : 'メニュー未選択';
 
-            if (!formData.phone) {
-                alert('電話番号を入力してください。');
-                return;
-            }
+    // irradiationsCountの整形（nullチェック）
+    const irradiationsText = formData.irradiationsCount || '';
 
-            if (!formData.selectedSymptom) {
-                alert('メニューを選択してください。');
-                return;
-            }
+    // フォームデータのチェック
+    if (!formData.name) {
+        alert('お名前を入力してください。');
+        return;
+    }
 
-            if (!formData.dates) {
-                alert('希望日時を選択してください。');
-                return;
-            }
+    if (!formData.phone) {
+        alert('電話番号を入力してください。');
+        return;
+    }
 
-            // selectedSymptomを文字列に整形
-            const selectedSymptomText = formData.selectedSymptom
-                ? formData.selectedSymptom.map(item => `${item.name}`).join(',')
-                : 'メニュー未選択';
+    if (!formData.selectedSymptom) {
+        alert('メニューを選択してください。');
+        return;
+    }
 
-            // irradiationsCountの整形（nullチェック）
-            const irradiationsText = formData.irradiationsCount || '';
+    if (!formData.dates) {
+        alert('希望日時を選択してください。');
+        return;
+    }
 
-            liff.sendMessages([{
-                type: 'text',
-                text: `【予約フォーム】\n指名：島尻\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\nコース：${formData.selectedMenu}\nメニュー：${selectedSymptomText},${irradiationsText}\n希望日時：\n${formData.dates[0]}\nメッセージ：${formData.message}`
-            }]).then(() => {
-                /* メッセージ送信成功時の処理 */
-                alert('当日キャンセルは無いようにお願いいたします。');
-                /* LIFFウィンドウを閉じる */
-                liff.closeWindow();
-            }).catch((err) => {
-                /* メッセージ送信失敗時の処理 */
-                console.error('メッセージの送信に失敗しました', err);
-            });
-        }
+    if (!irradiationsText) {
+        alert('オプションを選択してください。');
+        return;
+    }
+
+    // irradiationsText が空ならカンマを付けない
+    const menuText = irradiationsText
+        ? `${selectedSymptomText},${irradiationsText}`
+        : selectedSymptomText;
+
+    liff.sendMessages([{
+        type: 'text',
+        text: `【予約フォーム】\n指名：島尻\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\nコース：${formData.selectedMenu}\nメニュー：${menuText}\n希望日時：\n${formData.dates[0]}\nメッセージ：${formData.message}`
+    }]).then(() => {
+        /* メッセージ送信成功時の処理 */
+        alert('当日キャンセルは無いようにお願いいたします。');
+        /* LIFFウィンドウを閉じる */
+        liff.closeWindow();
+    }).catch((err) => {
+        /* メッセージ送信失敗時の処理 */
+        console.error('メッセージの送信に失敗しました', err);
+    });
+}
 
         function formatDate(dateStr) {
             if (!dateStr) return '';
