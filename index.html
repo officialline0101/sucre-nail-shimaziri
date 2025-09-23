@@ -961,16 +961,13 @@
 
         <div id="male" class="menu-section">
             <div class="highlight-background">
-                <span class="highlight-text">オプション<span class="required">必須</span></span>
-            </div>
-            <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">オフあり(+15分)</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">オフなし</button>
-            </div>
-            <div class="highlight-background">
                 <span class="highlight-text">◆ハンドネイル◆</span>
             </div>
             <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-category="ハンドネイル" data-price="15000">オフのみ</button>
+                <div class="info-textmenu">オフのみ：35分</div>
+                <button type="button" onclick="selectSymptom(this, 'treatment1')" data-category="ハンドネイル" data-price="15000">マニキュア</button>
+                <div class="info-textmenu">マニキュア：50分</div>
                 <button type="button" onclick="selectSymptom(this, 'treatment1')" data-category="ハンドネイル" data-price="15000">ケアのみ</button>
                 <div class="info-textmenu">ケアのみ：35分</div>
                 <button type="button" onclick="selectSymptom(this, 'treatment2')" data-category="ハンドネイル" data-price="15000">クリアジェル</button>
@@ -981,12 +978,28 @@
                 <div class="info-textmenu">シンプルアート：70分</div>
                 <button type="button" onclick="selectSymptom(this, 'treatment5')" data-category="ハンドネイル" data-price="15000">ボリュームアート</button>
                 <div class="info-textmenu">ボリュームアート：120分</div>
-                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-category="ハンドネイル" data-price="15000">オフのみ</button>
-                <div class="info-textmenu">オフのみ：35分</div>
+            </div>
+            <div class="highlight-background">
+                <span class="highlight-text">オプション<span class="required">必須</span></span>
+            </div>
+            <div class="irradiations">
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">オフあり(+15分)</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">オフなし</button>
             </div>
         </div>
 
         <div id="female" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆フットネイル◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-category="フットネイル" data-price="15000">オフのみ</button>
+                <div class="info-textmenu">オフのみ：35分</div>
+                <button type="button" onclick="selectSymptom(this, 'treatment6')" data-category="フットネイル" data-price="15000">ベーシックコース</button>
+                <div class="info-textmenu">ベーシックコース：90分</div>
+                <button type="button" onclick="selectSymptom(this, 'treatment7')" data-category="フットネイル" data-price="15000">ケアコース</button>
+                <div class="info-textmenu">ケアコース：110分</div>
+            </div>
             <div class="highlight-background">
                 <span class="highlight-text">オプション<span class="required">必須</span></span>
             </div>
@@ -994,17 +1007,6 @@
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">オフあり(+15分)</button>
                 <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">オフなし</button>
                 <button type="button" id="sanirradiations" onclick="selectirradiations(this)" data-price="15000">アートあり(+10分)</button>
-            </div>
-            <div class="highlight-background">
-                <span class="highlight-text">◆フットネイル◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment6')" data-category="フットネイル" data-price="15000">ベーシックコース</button>
-                <div class="info-textmenu">ベーシックコース：90分</div>
-                <button type="button" onclick="selectSymptom(this, 'treatment7')" data-category="フットネイル" data-price="15000">ケアコース</button>
-                <div class="info-textmenu">ケアコース：110分</div>
-                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-category="フットネイル" data-price="15000">オフのみ</button>
-                <div class="info-textmenu">オフのみ：35分</div>
             </div>
         </div>
 
@@ -1106,6 +1108,7 @@
 
         let menuTimes = {
             'ケアのみ': 45,
+            'マニキュア': 60,
             'オフのみ': 35,
             'クリアジェル': 50,
             'ワンカラー': 95,
