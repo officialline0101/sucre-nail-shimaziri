@@ -735,7 +735,7 @@
         }
 
         #selected-menus-display::before {
-            content: "選択中のメニュー（最大3つまで）";
+            content: "選択中のメニュー";
             display: block;
             /* blockに変更して横幅いっぱいに */
             width: 100%;
@@ -1265,7 +1265,7 @@
                 let updatedSelectedButtons = document.querySelectorAll('.symptoms button.active');
 
                 // もし選択数が3を超えたら、新しい選択をキャンセル
-                if (updatedSelectedButtons.length >= 3) {
+                if (updatedSelectedButtons.length >= 1) {
                     return;
                 }
 
